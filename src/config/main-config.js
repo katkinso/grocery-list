@@ -7,6 +7,9 @@ const session = require("express-session");
 const flash = require("express-flash");
 const passportConfig = require("./passport-config");
 const cors = require("cors");
+let allowedOrigin = ""
+if (process.env.NODE_ENV === 'development') allowedOrigin = 'http://localhost:3000';
+
 
 module.exports = {
   init(app, express){
@@ -14,7 +17,7 @@ module.exports = {
     app.use(bodyParser.urlencoded({ extended: true }));
     app.use(cors({
       credentials: true,
-      origin: 'http://localhost:3000'
+      origin: allowedOrigin
     }));
     app.use(express.json())
     app.use(session({
@@ -26,7 +29,6 @@ module.exports = {
         httpOnly: false 
       } 
     }));
-    app.use(flash());
     passportConfig.init(app);
     app.use((req,res,next) => {
       res.locals.currentUser = req.user;
@@ -34,11 +36,10 @@ module.exports = {
     })
     
     if (process.env.NODE_ENV === 'production') {
-      // Serve any static files
       app.use(express.static(path.join(__dirname,'..', '../client/build')))
 
       // Handle React routing, return all requests to React app
-      app.get(['/profile', '/dashboard', '/session'], function(req, res) {
+      app.get(['/profile', '/dashboard'], function(req, res) {
         res.sendFile(path.join(__dirname, '..', '../client/build/index.html'))
       });
     }

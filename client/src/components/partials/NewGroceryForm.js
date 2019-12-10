@@ -8,11 +8,10 @@ const NewGroceryForm = props => {
 
     return (
         <div className="container course-list mt-5">
-            <hr></hr>
-            <h2>Add Item</h2>
+            <h2>Add Grocery</h2>
             <form onSubmit={createGrocery}>
                 <div className="form-group">
-                    <label>Item Name</label>
+                    <label>Name</label>
                     <input
                         className="form-control"
                         type="text"

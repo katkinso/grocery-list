@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Link, withRouter } from 'react-router-dom'
-// import Button from '../ui/Button'
 import utils from '../../utils/utils'
 import api from '../../api/api'
 import Cookies from 'universal-cookie';
@@ -36,7 +35,8 @@ const Header = props => {
       <div className="container-fluid">
         <div className="row flex-nowrap justify-content-between align-items-center">
           <div className="col-4 p-1">
-          <Link to="/dashboard"><img src="/assets/images/grocery-logo.png" width="40px" alt="logo" /></Link>
+          <Link to="/dashboard"><img src="/assets/images/grocery-logo.png" width="40px" alt="logo" className="mx-2" /></Link>
+          <span className="font-weight-bold">Grocery List</span>
           </div>
           <div className="col-4 d-flex justify-content-end align-items-center">
             <img src="/assets/images/feathers.png" alt="avatar" className="avatar" />

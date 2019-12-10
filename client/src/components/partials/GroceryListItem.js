@@ -35,8 +35,3 @@ const GroceryListItem = props => {
 }
 
 export default GroceryListItem
-
-
-// <Button type="button" onClick={del} className="btn btn-primary mx-3" id="delete" name="delete" value={grocery.id}>DELETE</Button>
-// <Button type="button" onClick={edit} className="btn btn-primary" id="edit" name="edit" value={grocery.id}>EDIT</Button>
-
