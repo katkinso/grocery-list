@@ -8,6 +8,16 @@
 6. Deploy your site to a web host (e.g., on Amazon EC2, Heroku, Netlify, Google AppEngine, etc.).
 
 
+# Heroku
+heroku config:set megasecret="xxxxx
+heroku config:set cookieSecret="xxxxx
+heroku create katkinso-groceries
+git push heroku master
+
+Create db in heroku dash https://dashboard.heroku.com/auth/heroku/callback?code=c3c6e7c3-65c0-4f88-b684-773d6beda9a4
+
+heroku run sequelize db:migrate
+heroku logs --tail
 
 
 

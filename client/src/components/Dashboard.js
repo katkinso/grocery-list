@@ -124,29 +124,31 @@ class Dashboard extends Component {
     e.preventDefault()
 
     const updatedGrocery = this.state.groceryToEdit;
-    const grocerys = this.state.groceries.slice();  
+    const currentGroceries = this.state.groceries.slice();  
 
-    console.log("updatedGrocery= ", updatedGrocery)
 
-    const groceries = grocerys.filter((grocery, index) => {
-      if (grocery.id !== updatedGrocery.id){
-        return grocery;
+    const newGroceries = currentGroceries.map((grocery) => {
+      if (grocery.id === updatedGrocery.id){
+          return grocery = {
+              id: updatedGrocery.id,
+              name: updatedGrocery.name,
+              description: updatedGrocery.description,
+              purchased: updatedGrocery.purchased,
+              userId: grocery.userId
+          }
+      }else{
+        return grocery
       }
-      
-    });
-
-    groceries.push(updatedGrocery)
+    })
 
     api.updateGrocery(updatedGrocery, (err,res) => {
       if (!err){
-          this.setState({groceries, groceryToEdit: {
-            id: "",
-            name: "",
-            description: ""
-         }}) 
+        this.setState({groceries:newGroceries}) 
           this.send()
       }
     })
+
+
   }
 
   createGrocery(e){

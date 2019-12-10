@@ -2,15 +2,33 @@ import React, { Component } from "react";
 import { withRouter, Link } from 'react-router-dom'
 import utils from '../../utils/utils'
 import Button from 'react-bootstrap/Button'
+import { useAccordionToggle } from 'react-bootstrap/AccordionToggle';
 
 
 const EditGroceryForm = props => {
 
-    const { groceryToEdit, handleEditGrocery, updateGrocery, grocery } = props;
+    const { groceryToEdit, handleEditGrocery, updateGrocery, grocery, index } = props;
+
+    function CustomToggle({ children, eventKey, type, id }) {
+
+        const decoratedOnClick = useAccordionToggle(eventKey);
+        
+        let className = id === 'cancel' ? 'btn btn-secondary' : 'btn btn-primary mr-2'
+      
+        return (
+          <button
+            type={type}
+            className={className}
+            onClick={decoratedOnClick}
+          >
+            {children}
+          </button>
+        );
+    }
 
 
     return (
-        <div className="container course-list mt-5">
+        <div className="container course-list">
             <form onSubmit={updateGrocery}>
                 <div className="form-group">
                     <input
@@ -35,8 +53,8 @@ const EditGroceryForm = props => {
                     ></textarea>
                 </div>
 
-                <Button type="submit" className="btn btn-primary" id="update">UPDATE</Button>
-
+                <CustomToggle type="submit" id="update" eventKey={index}>UPDATE</CustomToggle>
+                <CustomToggle type="button" id="cancel" eventKey={index}>CANCEL</CustomToggle>
             </form>
 
         </div>

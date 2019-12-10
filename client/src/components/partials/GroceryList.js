@@ -4,11 +4,13 @@ import EditGroceryForm from "./EditGroceryForm";
 import Accordion from 'react-bootstrap/Accordion'
 import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
+import { useAccordionToggle } from 'react-bootstrap/AccordionToggle';
 
 
 const GroceryList = props => {
 
     const { groceries, togglePurchased, edit, del, groceryToEdit, handleEditGrocery, updateGrocery } = props;
+
 
     return (
         <div className="container course-list mt-5">
@@ -47,7 +49,6 @@ const GroceryList = props => {
                             <Accordion.Collapse eventKey={index} >
                                 <Card.Body>
 
-
                                     <EditGroceryForm
                                         index={index}
                                         key={index}
@@ -55,7 +56,7 @@ const GroceryList = props => {
                                         handleEditGrocery={(e) => handleEditGrocery(e)}
                                         updateGrocery={(e) => updateGrocery(e)}
                                     />
-
+                                    
                                 </Card.Body>
                             </Accordion.Collapse>
                         </Card>
