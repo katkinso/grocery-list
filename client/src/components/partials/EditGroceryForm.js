@@ -14,20 +14,28 @@ const EditGroceryForm = props => {
         const decoratedOnClick = useAccordionToggle(eventKey);
         
         let className = id === 'cancel' ? 'btn btn-secondary' : 'btn btn-primary mr-2'
-      
+        let disabled = ''
+        if ((id === 'update') && (groceryToEdit.purchased)) {
+            disabled = 'disabled'
+        }
+
+
         return (
           <button
             type={type}
             className={className}
             onClick={decoratedOnClick}
+            disabled={disabled}
           >
             {children}
           </button>
         );
     }
 
-
     return (
+
+
+
         <div className="container course-list">
             <form onSubmit={updateGrocery}>
                 <div className="form-group">
@@ -38,6 +46,7 @@ const EditGroceryForm = props => {
                         id="name"
                         value={groceryToEdit.name}
                         onChange={handleEditGrocery}
+                        disabled={(groceryToEdit.purchased) && 'disabled'}
                     />
                 </div>
 
@@ -50,6 +59,7 @@ const EditGroceryForm = props => {
                         id="description"
                         value={groceryToEdit.description}
                         onChange={handleEditGrocery}
+                        disabled={(groceryToEdit.purchased) && 'disabled'}
                     ></textarea>
                 </div>
 
