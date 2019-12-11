@@ -63,7 +63,7 @@ class Register extends Component {
                             <br></br><span className="text-light font-weight-bold">Grocery List</span>
                 
                             </div>
-                            <div class="col-3"></div>
+                            <div className="col-3"></div>
                         </div>
                         </div>
                    

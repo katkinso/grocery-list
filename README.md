@@ -1,24 +1,30 @@
 
-# Open Source Learning Project
+# Grocery List 
 
-This project allows students to sign up for open sessions and view sessions they have signed up for as well as upcoming sessions.
+This project allows users to 
+- Login 
+- Create, update and delete groceries 
+- Mark groceries as purchased
+- Allows other users to see the updates immediately in their client.
+
+This project is built using nodejs, express, react and socket.io to broadcast updates real time.
 
 ---
 
 ## Local Development 
 
-The project runs an express server to server the API and runs a react client. To run the local dev environment you need to run the API server and the Client in parallel. 
-
-- [REST API Docs](https://documenter.getpostman.com/view/9632917/SW7gU4tQ?version=latest#9c2c4b83-2ecb-4f5c-a0b5-f6f3fbc52af7)
-
+The project runs an express server to server the API and runs a react client. To run the local dev environment you need to run the API server and the Client in parallel. There are also some .env files that you will need to set locally.
 
 ## To Run the API Server
 
-- `npm start` from root
+Navigate to the root of the project
 
-server runs on http://localhost:9000
+- `npm start`
+- The server runs on http://localhost:9000
 
-#### To Run Tests
+#### To Run Jasmine Tests
+
+Navigate to the root of the project
 
 - `npm test`
 
@@ -27,15 +33,14 @@ server runs on http://localhost:9000
 ## To Run the Client
 
 - Navigate to `/client` and run `npm start`
+- The client runs on http://localhost:3000
 
-client runs on http://localhost:3000
 
-
-#### Build CSS
+#### To Build CSS & Watch for Changes
 
 - `npm run sass`
 
-#### To Run Tests
+#### To Run Client Tests
 
 - `npm test`
 
