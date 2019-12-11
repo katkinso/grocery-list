@@ -8,14 +8,14 @@ describe("routes : groceries", () => {
 
   beforeAll((done) => {
 
-      this.user = {
-        email: "grocery@test.com",
-        firstName: 'groceryFirst',
-        lastName: 'groceryLast'
+    this.user = {
+        email: "test@test.com",
+        firstName: 'testFirst',
+        lastName: 'testLast',
+        id: '',
+        password: '123456'
       }
       
-      this.userId = 1;
-      this.password = '123456'
       this.loginCookie = ''
       this.groceryId = ''
 
@@ -26,12 +26,11 @@ describe("routes : groceries", () => {
             url: `${base}/users/register`,
             form: { 
               ...this.user, 
-              "password":this.password, 
-              "passwordConfirmation":this.password 
+              "passwordConfirmation":this.user.password 
             }
           },(err, res, body) => {
           
-          const user = { ...this.user, id: this.userId }
+          this.user.id = JSON.parse(body).id;
           this.loginCookie = res.headers['set-cookie']; 
            
           done();
@@ -49,16 +48,15 @@ describe("routes : groceries", () => {
   describe("/groceries", () => {
 
 
-
       //---
-      it("should return status code 200 & check name is \"Chicken\"", (done) => {
+      it("should return status code 200 & check body", (done) => {
         request.post({
             url: `${base}/groceries/create`,
             form: {
               "name": "Chicken",
               "description": "Roast Chicken",
               "purchased": false,
-              "userId": 1
+              "userId": this.user.id
             },
             headers: {
               'Cookie': this.loginCookie
@@ -71,6 +69,8 @@ describe("routes : groceries", () => {
           expect(res.statusCode).toBe(200);
           expect(newGrocery.name).toBe('Chicken');
           expect(newGrocery.description).toBe('Roast Chicken');
+          expect(newGrocery.userId).toBe(this.user.id);
+          
           done();
         });
       });
@@ -85,7 +85,7 @@ describe("routes : groceries", () => {
               "name": "Chicken",
               "description": "Fried Chicken",
               "purchased": true,
-              "userId": 1
+              "userId": this.user.id
             },
             headers: {
               'Cookie': this.loginCookie
