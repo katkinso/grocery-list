@@ -4,8 +4,6 @@ var request = require('request');
 module.exports = {
     create(req, res, next){
 
-        console.log("got here")
-
         let newGrocery= {
             name: req.body.name,
             description: req.body.description,

@@ -42,8 +42,7 @@ describe("routes : users", () => {
         },(err, res, body) => {
         
         const user = { ...this.user, id: this.userId }
-
-        console.log(user)
+        
 
         expect(res.statusCode).toBe(200);
         expect(body).toContain(this.userId);
@@ -60,7 +59,8 @@ describe("routes : users", () => {
               password: this.password
           }
         },(err, res, body) => {
-
+        
+        this.loginCookie = res.headers['set-cookie']; 
         expect(res.statusCode).toBe(200);
         expect(body).toContain(this.user.email);
         done();
@@ -84,7 +84,13 @@ describe("routes : users", () => {
         done();
       });
     });
+
+
+  
     
 
   });//DESCRIBE
+
+
+
 });
