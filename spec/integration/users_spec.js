@@ -28,7 +28,7 @@ describe("routes : users", () => {
 
 
   //DESCRIBE ------
-  describe("GET /users/register", () => {
+  describe("/user registration & authentication", () => {
 
     it("should return status code 200 and verify the user email", (done) => {
       request.post({
@@ -80,10 +80,33 @@ describe("routes : users", () => {
       });
     });
 
+  });//DESCRIBE
+
+
+
+  //DESCRIBE ------
+  describe("GET /user", () => {
+
     //---
     it("should return the email for the currently authenticated user & return status code 200", (done) => {
       request.get({
           url: `${base}/users/me`,
+          headers: {
+            'Cookie': this.loginCookie
+          } 
+        },(err, res, body) => {
+
+        let user = JSON.parse(body);
+        expect(user.email).toBe(this.user.email);
+        expect(res.statusCode).toBe(200);
+        done();
+      });
+    });
+
+    //---
+    it('should return the email with user id & return status code 200', (done) => {
+      request.get({
+          url: `${base}/users/${this.user.id}`,
           headers: {
             'Cookie': this.loginCookie
           } 
